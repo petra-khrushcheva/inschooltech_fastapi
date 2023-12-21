@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     db_echo: bool
     secret_key: str
 
+    app_title: str
+    app_version: str
+
     model_config = SettingsConfigDict(
         env_file=f"{os.path.dirname(os.path.abspath(__file__))}/../.env"
     )

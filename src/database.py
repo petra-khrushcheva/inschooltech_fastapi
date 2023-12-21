@@ -1,4 +1,4 @@
-from config import settings
+from src.config import settings
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 engine = create_async_engine(url=settings.DATABASE_URL, echo=settings.db_echo)
