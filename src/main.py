@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
-from src.config import settings
-from src.public.router import router as public_router
+from src.core.config import settings
+from src.router.api_v1 import router
 
 app = FastAPI(
-    title=settings.app_title,
-    version=settings.app_version
+    title=settings.project_name,
+    version=settings.project_version
 )
 
-app.include_router(public_router)
+app.include_router(router)

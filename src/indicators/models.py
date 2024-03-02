@@ -1,10 +1,10 @@
 import uuid
 from decimal import Decimal
 
-from sqlalchemy import String, Text, Numeric, ForeignKey
+from sqlalchemy import ForeignKey, Numeric, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.models import Base
+from src.core.basemodels import Base
 
 
 class Indicator(Base):

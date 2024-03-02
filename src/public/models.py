@@ -1,9 +1,10 @@
 import datetime
 import uuid
+
 from sqlalchemy import ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.models import Base
+from src.core.basemodels import Base
 
 
 class Lab(Base):
@@ -22,4 +23,4 @@ class Test(Base):
         ForeignKey("public.labs.id", ondelete='RESTRICT')
     )
 
-    results: Mapped[list["Score"]] = relationship()
+    results: Mapped[list["Score"]] = relationship()  # noqa: F821

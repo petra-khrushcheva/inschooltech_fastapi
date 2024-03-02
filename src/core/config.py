@@ -10,17 +10,19 @@ class Settings(BaseSettings):
     db_password: str
     db_username: str
     db_echo: bool
+
     secret_key: str
 
-    app_title: str
-    app_version: str
+    project_name: str
+    project_version: str
+    jwt_lifetime_seconds: int
 
     model_config = SettingsConfigDict(
-        env_file=f"{os.path.dirname(os.path.abspath(__file__))}/../.env"
+        env_file=f"{os.path.dirname(os.path.abspath(__file__))}/../../.env"
     )
 
     @property
-    def DATABASE_URL(self):
+    def database_url(self):
         return (f'postgresql+asyncpg://{self.db_username}:'
                 f'{self.db_password}@{self.db_hostname}:'
                 f'{self.db_port}/{self.db_name}')
