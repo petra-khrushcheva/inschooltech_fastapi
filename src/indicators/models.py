@@ -59,3 +59,4 @@ class Score(Base):
     )
 
     indicator_metric: Mapped[IndicatorsMetric] = relationship()
+    test: Mapped["Test"] = relationship(back_populates="results")  # noqa: F821

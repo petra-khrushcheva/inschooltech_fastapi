@@ -8,19 +8,24 @@ from src.core.basemodels import Base
 
 
 class Lab(Base):
-    __tablename__ = 'public.labs'
+    __tablename__ = "public.labs"
 
     name: Mapped[str] = mapped_column(String(200))
 
+    tests: Mapped[list["Test"]] = relationship(back_populates="lab")
+
 
 class Test(Base):
-    __tablename__ = 'public.tests'
+    __tablename__ = "public.tests"
 
     started_at: Mapped[datetime.datetime]
     completed_at: Mapped[datetime.datetime]
     comment: Mapped[str | None] = mapped_column(Text)
     lab_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("public.labs.id", ondelete='RESTRICT')
+        ForeignKey("public.labs.id", ondelete="RESTRICT")
     )
 
-    results: Mapped[list["Score"]] = relationship()  # noqa: F821
+    lab: Mapped["Lab"] = relationship(back_populates="tests")
+    results: Mapped[list["Score"]] = relationship(  # noqa: F821
+        back_populates="test"
+    )
