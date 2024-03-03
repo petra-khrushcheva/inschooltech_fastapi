@@ -2,6 +2,7 @@ import uuid
 from decimal import Decimal
 
 from sqlalchemy import ForeignKey, Numeric, String, Text
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.core.basemodels import Base
@@ -32,9 +33,9 @@ class IndicatorsMetric(Base):
         ForeignKey("metrics.id", ondelete="RESTRICT")
     )
 
-    indicator: Mapped[Indicator] = relationship()
-    metric: Mapped[Metric] = relationship()
-    reference: Mapped["Reference"] = relationship()
+    indicator: Mapped[Indicator] = relationship(lazy="joined")
+    metric: Mapped[Metric] = relationship(lazy="joined")
+    reference: Mapped["Reference"] = relationship(lazy="joined")
 
 
 class Reference(Base):
@@ -58,5 +59,25 @@ class Score(Base):
         ForeignKey("indicators_metrics.id", ondelete="RESTRICT")
     )
 
-    indicator_metric: Mapped[IndicatorsMetric] = relationship()
+    indicator_metric: Mapped[IndicatorsMetric] = relationship(lazy="joined")
     test: Mapped["Test"] = relationship(back_populates="results")  # noqa: F821
+
+    @hybrid_property
+    def is_within_normal_range(self) -> bool:
+        return (
+            self.indicator_metric.reference.min_score
+            <= self.score
+            <= self.indicator_metric.reference.max_score
+        )
+
+    @property
+    def indicator_name(self):
+        return self.indicator_metric.indicator.name
+
+    @property
+    def metric_name(self):
+        return self.indicator_metric.metric.name
+
+    @property
+    def metric_unit(self):
+        return self.indicator_metric.metric.unit

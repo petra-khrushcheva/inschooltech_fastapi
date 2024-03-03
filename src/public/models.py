@@ -2,6 +2,7 @@ import datetime
 import uuid
 
 from sqlalchemy import ForeignKey, String, Text
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.core.basemodels import Base
@@ -29,3 +30,7 @@ class Test(Base):
     results: Mapped[list["Score"]] = relationship(  # noqa: F821
         back_populates="test"
     )
+
+    @hybrid_property
+    def duration_seconds(self):
+        return int((self.completed_at - self.started_at).total_seconds())
