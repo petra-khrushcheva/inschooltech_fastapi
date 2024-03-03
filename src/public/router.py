@@ -7,8 +7,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.core.database import get_session
 from src.public.schemas import Test
 from src.public.service import get_tests
+from src.users.dependencies import current_active_user as current_user
 
-router = APIRouter(prefix="/tests", tags=["Tests"])
+router = APIRouter(
+    prefix="/tests", tags=["Tests"], dependencies=[Depends(current_user)]
+)
 
 
 @router.get("/tests_by_lab", response_model=List[Test])
