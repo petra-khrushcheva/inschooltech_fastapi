@@ -28,9 +28,9 @@ services:
       - db
 
   web:
-    container_name: backend
+    container_name: ${PROJECT_NAME}_backend
     build: .
-    image: backend
+    image: ${PROJECT_NAME}_backend
     environment:
       - DB_HOSTNAME=db
       - DB_USERNAME=${DB_USERNAME}
