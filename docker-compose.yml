@@ -18,7 +18,7 @@ services:
 
   web:
     container_name: backend
-    image: petrakhrushcheva/taskee
+    image: petrakhrushcheva/inschooltech_fastapi
     environment:
       - DB_HOSTNAME=db
       - DB_USERNAME=${DB_USERNAME}
