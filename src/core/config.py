@@ -1,4 +1,4 @@
-import os
+import pathlib
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import SecretStr
@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     jwt_lifetime_seconds: int
 
     model_config = SettingsConfigDict(
-        env_file=f"{os.path.dirname(os.path.abspath(__file__))}/../../.env",
+        env_file=f"{pathlib.Path(__file__).parents[2]}/.env",
         extra="ignore",
     )
 
