@@ -10,7 +10,10 @@
 ### Технологии
 Python 3.11  
 FastAPI 0.104  
-SQLAlchemy 2.0
+SQLAlchemy 2.0  
+Pydantic 2.5  
+Alembic 1.13  
+PostgreSQL  
 ***
 ### Установка
 - Клонируйте проект:
@@ -21,21 +24,7 @@ git clone git@github.com:petra-khrushcheva/inschooltech_fastapi.git
 ```
 cd inschooltech_fastapi
 ``` 
-- Cоздайте .env файл по образцу:
-```
-DB_HOSTNAME=
-DB_PORT=
-DB_USERNAME=
-DB_PASSWORD=
-DB_NAME=
-DB_ECHO=False
-SECRET_KEY=
-
-PROJECT_NAME="Inschooltech"
-PROJECT_VERSION="0.1.0"
-JWT_LIFETIME_SECONDS=2592000 #1 month
-
-``` 
+- Cоздайте переменные окружения по [образцу](https://github.com/petra-khrushcheva/inschooltech_fastapi/blob/main/.env.example).
 - Запустите Docker-compose:
 ```
 docker compose -f docker-compose-dev.yml up

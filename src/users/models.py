@@ -3,7 +3,7 @@ from sqlalchemy import String
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.core.basemodels import Base
+from src.core import Base
 
 
 class User(Base, SQLAlchemyBaseUserTableUUID):

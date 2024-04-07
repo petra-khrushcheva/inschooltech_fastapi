@@ -5,7 +5,7 @@ from sqlalchemy import ForeignKey, String, Text
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.core.basemodels import Base
+from src.core import Base
 
 
 class Lab(Base):
