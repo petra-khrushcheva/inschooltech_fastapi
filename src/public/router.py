@@ -11,7 +11,7 @@ from src.public.service import get_tests
 router = APIRouter(prefix="/tests", tags=["Tests"])
 
 
-@router.get("/tests_by_lab", response_model=List[Test])
+@router.get("/tests", response_model=List[Test])
 async def get_tests_by_lab(
     lab_id: UUID, session: AsyncSession = Depends(get_session)
 ):
